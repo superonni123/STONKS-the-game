@@ -27,7 +27,7 @@ while True:
     elif cmd == "help":
         print("")
         print("Help     show this page")
-        print("Exit     exits the game")
+        print("Exit     you should know what this command does")
         print("Work     you gain money from working")
         print("Check    shows how many money and stocks you got")
         print("Invest   you can buy stocks and make money")
@@ -42,10 +42,20 @@ while True:
         money = money + money_add
 
     elif cmd == "invest":
+
         while True:
             cmd2 = input("action: ")
             if cmd2 == 'exit':
                 break
+
+            elif cmd2 == 'help':
+                print("this is invest mode help")
+                print("")
+                print("help     shows this page")
+                print("exit     you should know what this command does")
+                print("check    checks stock prices")
+                print("buy      buy stocks")
+                print("sell     sell stocks")
 
             elif cmd2 == 'check':
                 a = random.randrange(0, 10000000, 1)
