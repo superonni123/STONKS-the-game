@@ -21,16 +21,13 @@ print("welcome to STONKS the game")
 while True:
     print("")
     cmd = input("what do you want to do: ")
-    if cmd == 'exit':
-        break
 
-    elif cmd == "help":
+    if cmd == "help":
         print("")
         print("Help     show this page")
-        print("Exit     you should know what this command does")
         print("Work     you gain money from working")
         print("Check    shows how many money and stocks you got")
-        print("Invest   you can buy stocks and make money")
+        print("Invest   enters INVESTMENT mode")
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
@@ -42,10 +39,12 @@ while True:
         money = money + money_add
 
     elif cmd == "invest":
+        print("you have entered INVESTMENT mode")
 
         while True:
             cmd2 = input("action: ")
             if cmd2 == 'exit':
+                print("you have exited INVESTMENT mode")
                 break
 
             elif cmd2 == 'help':
