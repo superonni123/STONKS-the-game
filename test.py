@@ -3,7 +3,7 @@ import time
 
 money = 0
 owned_stock1 = 0
-stock1price = random.randrange(1, 100, 1)
+stock1price = random.randrange(5, 100, 1)
 
 print("initiating loading")
 time.sleep(1)
@@ -17,7 +17,7 @@ print("loading complete")
 time.sleep(1)
 print("")
 
-print("welcome to STONKS the game")
+print('welcome to STONKS the game')
 while True:
     print("")
     cmd = input("what do you want to do: ")
@@ -27,7 +27,7 @@ while True:
         print("help     show this page")
         print("work     you gain money from working")
         print("check    shows how many money and stocks you got")
-        print("stonks   enters INVESTMENT mode")
+        print("stonks   enters STONKS mode")
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
@@ -37,6 +37,10 @@ while True:
         money_add = random.randrange(5, 20, 1)
         print("you gained " + str(money_add) + " money from work")
         money = money + money_add
+
+    elif cmd == 'give':
+        print("you should check now")
+        money = money + 1000000000
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
@@ -57,13 +61,21 @@ while True:
                 print("sell     sell stocks")
 
             elif cmd2 == 'check':
-                a = random.randrange(0, 10000000, 1)
-                if a < 5:
+
+                a = random.randrange(0, 1000000, 1)
+
+                if (a == 42069) or (a == 69420):
+                    print("nice")
+                    stock1price = stock1price + 10000
+
+                elif a > 500000:
                     stock1price = stock1price + random.randrange(1, 100, 1)
 
-                elif a > 5:
+                elif a < 500000:
                     stock1price = stock1price - random.randrange(1, 100, 1)
 
+                if stock1price < 10:
+                    stock1price = 10
                 print("stock 1 costs " + str(stock1price) + " money")
                 print("")
 
