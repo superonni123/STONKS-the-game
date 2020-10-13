@@ -24,27 +24,27 @@ while True:
 
     if cmd == "help":
         print("")
-        print("Help     show this page")
-        print("Work     you gain money from working")
-        print("Check    shows how many money and stocks you got")
-        print("Invest   enters INVESTMENT mode")
+        print("help     show this page")
+        print("work     you gain money from working")
+        print("check    shows how many money and stocks you got")
+        print("stonks   enters INVESTMENT mode")
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
-        print("you have " + str(owned_stock1) + " stock1")
+        print("you have " + str(owned_stock1) + " stock-1")
 
     elif cmd == "work":
         money_add = random.randrange(5, 20, 1)
         print("you gained " + str(money_add) + " money from work")
         money = money + money_add
 
-    elif cmd == "invest":
-        print("you have entered INVESTMENT mode")
+    elif cmd == "stonks":
+        print("you have entered STONKS mode")
 
         while True:
             cmd2 = input("action: ")
             if cmd2 == 'exit':
-                print("you have exited INVESTMENT mode")
+                print("you have exited STONKS mode")
                 break
 
             elif cmd2 == 'help':
