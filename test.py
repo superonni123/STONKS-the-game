@@ -1,9 +1,26 @@
 import random
 import time
+import threading
 
 money = 0
 owned_stock1 = 0
 stock1price = random.randrange(10, 100, 1)
+
+
+def background():
+    while True:
+        global money
+        time.sleep(10)
+        osinko = stock1price * 0.035 * owned_stock1
+        money = money + osinko
+        if osinko > 0:
+            print("you got " + str(osinko) + " from your stocks")
+
+
+b = threading.Thread(name='background', target=background)
+
+b.start()
+
 
 print("initiating loading")
 time.sleep(1)
@@ -46,6 +63,7 @@ while True:
         print("you have entered STONKS mode")
 
         while True:
+
             cmd2 = input("action: ")
             if cmd2 == 'exit':
                 print("you have exited STONKS mode")
