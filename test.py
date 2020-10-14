@@ -55,8 +55,9 @@ while True:
         print("you gained " + str(money_add) + " money from work")
         money = money + money_add
 
-    elif cmd == 'give':
-        print("you should check now")
+    elif cmd == 'OwO':
+        print("OwO you found a easter egg good for you")
+        print("unless you looked at the source code D:<")
         money = money + 1000000000
 
     elif cmd == "stonks":
