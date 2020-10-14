@@ -3,7 +3,7 @@ import time
 
 money = 0
 owned_stock1 = 0
-stock1price = random.randrange(5, 100, 1)
+stock1price = random.randrange(10, 100, 1)
 
 print("initiating loading")
 time.sleep(1)
