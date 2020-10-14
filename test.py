@@ -1,10 +1,12 @@
 import random
 import time
 import threading
+import sys
 
 money = 0
 owned_stock1 = 0
 stock1price = random.randrange(10, 100, 1)
+dont_use_me = 0
 
 
 def background():
@@ -56,9 +58,13 @@ while True:
         money = money + money_add
 
     elif cmd == 'OwO':
+        dont_use_me = dont_use_me + 1
         print("OwO you found a easter egg good for you")
         print("unless you looked at the source code D:<")
         money = money + 1000000000
+        if dont_use_me == 2:
+            print("HEY don't use this easter egg twice!!")
+            sys.exit(0)
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
