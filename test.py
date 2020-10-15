@@ -9,6 +9,7 @@ stock1price = random.randrange(10, 100, 1)
 dont_use_me = 0
 osinko = stock1price * 0.035 * owned_stock1
 round_osinko = round(osinko)
+e = 0
 
 
 def background():
@@ -62,10 +63,11 @@ while True:
 
     if cmd == "help":
         print("")
-        print("help     show this page")
-        print("work     you gain money from working")
-        print("check    shows how many money, stocks and how big interest you got")
-        print("stonks   enters STONKS mode")
+        print("help         show this page")
+        print("work         you gain money from working")
+        print("check        shows how many money, stocks and how big interest you got")
+        print("stonks       enters STONKS mode")
+        print("shutdown     shuts the game down")
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
@@ -85,6 +87,14 @@ while True:
         if dont_use_me == 2:
             print("HEY don't use this easter egg twice!!")
             sys.exit(0)
+
+    elif cmd == "shutdown":
+        print("are you sure type 'shutdown again'")
+        e = e + 1
+        if e == 2:
+            print("game closed now you can close this window")
+            break
+
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
