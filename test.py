@@ -7,22 +7,41 @@ money = 0
 owned_stock1 = 0
 stock1price = random.randrange(10, 100, 1)
 dont_use_me = 0
+osinko = stock1price * 0.035 * owned_stock1
+round_osinko = round(osinko)
 
 
 def background():
     while True:
         global money
+        global stock1price
+        global a
+        global round_osinko
+        global osinko
         time.sleep(10)
         osinko = stock1price * 0.035 * owned_stock1
         money = money + osinko
+        round_osinko = round(osinko)
         if osinko > 0:
-            print("you got " + str(osinko) + " from your stocks")
+            a = random.randrange(0, 1000000, 1)
+
+            if (a == 42069) or (a == 69420):
+                print("nice")
+                stock1price = stock1price + 10000
+
+            elif a > 500000:
+                stock1price = stock1price + random.randrange(1, 100, 1)
+
+            elif a < 500000:
+                stock1price = stock1price - random.randrange(1, 100, 1)
+
+            if stock1price < 10:
+                stock1price = 10
 
 
 b = threading.Thread(name='background', target=background)
 
 b.start()
-
 
 print("initiating loading")
 time.sleep(1)
@@ -45,12 +64,13 @@ while True:
         print("")
         print("help     show this page")
         print("work     you gain money from working")
-        print("check    shows how many money and stocks you got")
+        print("check    shows how many money, stocks and how big interest you got")
         print("stonks   enters STONKS mode")
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
         print("you have " + str(owned_stock1) + " stock-1")
+        print("your interest is " + str(round_osinko))
 
     elif cmd == "work":
         money_add = random.randrange(5, 20, 1)
@@ -87,20 +107,20 @@ while True:
 
             elif cmd2 == 'check':
 
-                a = random.randrange(0, 1000000, 1)
+                # a = random.randrange(0, 1000000, 1)
 
-                if (a == 42069) or (a == 69420):
-                    print("nice")
-                    stock1price = stock1price + 10000
+                # if (a == 42069) or (a == 69420):
+                # print("nice")
+                # stock1price = stock1price + 10000
 
-                elif a > 500000:
-                    stock1price = stock1price + random.randrange(1, 100, 1)
+                # elif a > 500000:
+                # stock1price = stock1price + random.randrange(1, 100, 1)
 
-                elif a < 500000:
-                    stock1price = stock1price - random.randrange(1, 100, 1)
+                # elif a < 500000:
+                # stock1price = stock1price - random.randrange(1, 100, 1)
 
-                if stock1price < 10:
-                    stock1price = 10
+                # if stock1price < 10:
+                # stock1price = 10
                 print("stock 1 costs " + str(stock1price) + " money")
                 print("")
 
