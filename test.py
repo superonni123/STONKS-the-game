@@ -116,21 +116,6 @@ while True:
                 print("sell     sell stocks")
 
             elif cmd2 == 'check':
-
-                # a = random.randrange(0, 1000000, 1)
-
-                # if (a == 42069) or (a == 69420):
-                # print("nice")
-                # stock1price = stock1price + 10000
-
-                # elif a > 500000:
-                # stock1price = stock1price + random.randrange(1, 100, 1)
-
-                # elif a < 500000:
-                # stock1price = stock1price - random.randrange(1, 100, 1)
-
-                # if stock1price < 10:
-                # stock1price = 10
                 print("stock 1 costs " + str(stock1price) + " money")
                 print("")
 
