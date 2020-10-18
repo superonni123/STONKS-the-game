@@ -9,16 +9,17 @@ stock1price = random.randrange(10, 100, 1)
 dont_use_me = 0
 osinko = stock1price * 0.035 * owned_stock1
 round_osinko = round(osinko)
-e = 0
+exi = 0
 
 
 def background():
     while True:
-        global money
         global stock1price
-        global a
         global round_osinko
         global osinko
+        global money
+        global owned_stock1
+
         time.sleep(10)
         osinko = stock1price * 0.035 * owned_stock1
         money = money + osinko
@@ -90,11 +91,10 @@ while True:
 
     elif cmd == "shutdown":
         print("are you sure type 'shutdown again'")
-        e = e + 1
-        if e == 2:
+        exi = exi + 1
+        if exi == 2:
             print("game closed now you can close this window")
             break
-
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
@@ -124,9 +124,15 @@ while True:
                 owned_stock1 = owned_stock1 + buy
                 money = money - (stock1price * buy)
                 print("successfully bought " + str(buy) + " stocks")
+                if money < 0:
+                    print("you dont have enough money")
+                    sys.exit()
 
             elif cmd2 == 'sell':
                 sell = int(input("how many stock to sell: "))
                 owned_stock1 = owned_stock1 - sell
                 money = money + (stock1price * sell)
                 print("successfully sold " + str(sell) + " stocks")
+                if owned_stock1 < 0:
+                    print("you dont have enough stocks")
+                    sys.exit()
