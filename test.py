@@ -90,8 +90,8 @@ while True:
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
-        print("you have " + str(owned_stock1) + " stock1")
-        print("you have " + str(owned_stock2) + " stock2")
+        print("you have " + str(owned_stock1) + " stocks of Orb Industries")
+        print("you have " + str(owned_stock2) + " stocks of Chair")
         print("your interest is " + str(round_osinko))
 
     elif cmd == "work":
@@ -135,10 +135,10 @@ while True:
                 print("sell     sell stocks")
 
             elif cmd2 == 'check':
-                print("ID     STOCK                    price")
+                print("ID     STOCK                    price        owned")
                 print("")
-                print("1       Stock1                   " + str(stock1price))
-                print("2       Stock2                   " + str(stock2price))
+                print("1       Orb Industries          " + str(stock1price) + "             " + str(owned_stock1))
+                print("2       Chair                   " + str(stock2price) + "             " + str(owned_stock2))
 
             elif cmd2 == 'buy':
                 ID, buy = input("first enter ID then amount to buy: ").split()
@@ -151,7 +151,7 @@ while True:
                     else:
                         money = money - buy_cost1
                         owned_stock1 = owned_stock1 + int(buy)
-                        print("successfully bought " + str(buy) + " stock1 for " + str(buy_cost1))
+                        print("successfully bought " + str(buy) + " stocks of Orb Industries for " + str(buy_cost1))
                 elif ID == str(2):
                     buy_cost2 = stock2price * int(buy)
                     if buy_cost2 > money:
@@ -160,24 +160,26 @@ while True:
                     else:
                         owned_stock2 = owned_stock2 + int(buy)
                         money = money - buy_cost2
-                    print("successfully bought " + str(buy) + " stock2")
+                    print("successfully bought " + str(buy) + " stocks of Chair for " + str(buy_cost2))
 
             elif cmd2 == 'sell':
                 ID, sell = input("first enter ID then amount to sell: ").split()
                 if ID == str(1):
+                    sell_cost1 = int(stock1price) * int(sell)
                     if str(owned_stock1) < str(sell):
                         print("you dont have enough stocks")
                         break
                     else:
                         owned_stock1 = int(owned_stock1) - int(sell)
-                        money = money + (int(stock1price) * int(sell))
-                        print("successfully sold " + str(sell) + " stock " + str(ID))
+                        money = money + sell_cost1
+                        print("successfully sold " + str(sell) + " stocks of Orb Industries " + str(sell_cost1))
 
                 if ID == str(2):
+                    sell_cost2 = int(stock2price) * int(sell)
                     if str(owned_stock2) < str(sell):
                         print("you dont have enough stocks")
                         break
                     else:
                         owned_stock2 = int(owned_stock2) - int(sell)
-                        money = money + (int(stock2price) * int(sell))
-                        print("successfully sold " + str(sell) + " stock " + str(ID))
+                        money = money + sell_cost2
+                        print("successfully sold " + str(sell) + " stocks of Chair for " + str(sell_cost2))
