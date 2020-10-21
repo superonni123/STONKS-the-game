@@ -5,40 +5,58 @@ import sys
 
 money = 0
 owned_stock1 = 0
+owned_stock2 = 0
 stock1price = random.randrange(10, 100, 1)
+stock2price = random.randrange(30, 500, 1)
+osinko1 = stock1price * 0.035 * owned_stock1
+osinko2 = stock2price * 0.05 * owned_stock2
+round_osinko = round(osinko1) + round(osinko2)
 dont_use_me = 0
-osinko = stock1price * 0.035 * owned_stock1
-round_osinko = round(osinko)
 exi = 0
 
 
 def background():
     while True:
         global stock1price
-        global round_osinko
-        global osinko
-        global money
+        global stock2price
         global owned_stock1
+        global owned_stock2
+        global osinko1
+        global osinko2
+        global round_osinko
+        global money
 
-        time.sleep(10)
-        osinko = stock1price * 0.035 * owned_stock1
-        money = money + osinko
-        round_osinko = round(osinko)
-        if osinko > 0:
-            a = random.randrange(0, 1000000, 1)
+        time.sleep(8)
+        osinko1 = stock1price * 0.035 * owned_stock1
+        osinko2 = stock2price * 0.05 * owned_stock2
+        round_osinko = round(osinko1) + round(osinko2)
+        money = money + round_osinko
 
-            if (a == 42069) or (a == 69420):
-                print("nice")
-                stock1price = stock1price + 10000
+        a1 = random.randrange(0, 1000000, 1)
 
-            elif a > 500000:
-                stock1price = stock1price + random.randrange(1, 100, 1)
+        if (a1 == 42069) or (a1 == 69420):
+            print("nice")
+            stock1price = stock1price + 10000
 
-            elif a < 500000:
-                stock1price = stock1price - random.randrange(1, 100, 1)
+        elif a1 > 500000:
+            stock1price = stock1price + random.randrange(1, 100, 1)
 
-            if stock1price < 10:
-                stock1price = 10
+        elif a1 < 500000:
+            stock1price = stock1price - random.randrange(1, 100, 1)
+
+        if stock1price < 10:
+            stock1price = 10
+
+        a2 = random.randrange(0, 100, 1)
+
+        if a2 > 50:
+            stock2price = stock2price + random.randrange(1, 120, 1)
+
+        elif a2 < 50:
+            stock2price = stock2price - random.randrange(1, 120, 1)
+
+        if stock2price < 30:
+            stock2price = 30
 
 
 b = threading.Thread(name='background', target=background)
@@ -72,7 +90,8 @@ while True:
 
     elif cmd == "check":
         print("you have " + str(money) + " money")
-        print("you have " + str(owned_stock1) + " stock-1")
+        print("you have " + str(owned_stock1) + " stock1")
+        print("you have " + str(owned_stock2) + " stock2")
         print("your interest is " + str(round_osinko))
 
     elif cmd == "work":
@@ -94,7 +113,7 @@ while True:
         exi = exi + 1
         if exi == 2:
             print("game closed now you can close this window")
-            break
+            sys.exit()
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
@@ -116,23 +135,49 @@ while True:
                 print("sell     sell stocks")
 
             elif cmd2 == 'check':
-                print("stock 1 costs " + str(stock1price) + " money")
+                print("ID     STOCK                    price")
                 print("")
+                print("1       Stock1                   " + str(stock1price))
+                print("2       Stock2                   " + str(stock2price))
 
             elif cmd2 == 'buy':
-                buy = int(input("how many stocks to buy: "))
-                owned_stock1 = owned_stock1 + buy
-                money = money - (stock1price * buy)
-                print("successfully bought " + str(buy) + " stocks")
-                if money < 0:
-                    print("you dont have enough money")
-                    sys.exit()
+                ID, buy = input("first enter ID then amount to buy: ").split()
+
+                if ID == str(1):
+                    buy_cost1 = stock1price * int(buy)
+                    if buy_cost1 > money:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        money = money - buy_cost1
+                        owned_stock1 = owned_stock1 + int(buy)
+                        print("successfully bought " + str(buy) + " stock1 for " + str(buy_cost1))
+                elif ID == str(2):
+                    buy_cost2 = stock2price * int(buy)
+                    if buy_cost2 > money:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        owned_stock2 = owned_stock2 + int(buy)
+                        money = money - buy_cost2
+                    print("successfully bought " + str(buy) + " stock2")
 
             elif cmd2 == 'sell':
-                sell = int(input("how many stock to sell: "))
-                owned_stock1 = owned_stock1 - sell
-                money = money + (stock1price * sell)
-                print("successfully sold " + str(sell) + " stocks")
-                if owned_stock1 < 0:
-                    print("you dont have enough stocks")
-                    sys.exit()
+                ID, sell = input("first enter ID then amount to sell: ").split()
+                if ID == str(1):
+                    if str(owned_stock1) < str(sell):
+                        print("you dont have enough stocks")
+                        break
+                    else:
+                        owned_stock1 = int(owned_stock1) - int(sell)
+                        money = money + (int(stock1price) * int(sell))
+                        print("successfully sold " + str(sell) + " stock " + str(ID))
+
+                if ID == str(2):
+                    if str(owned_stock2) < str(sell):
+                        print("you dont have enough stocks")
+                        break
+                    else:
+                        owned_stock2 = int(owned_stock2) - int(sell)
+                        money = money + (int(stock2price) * int(sell))
+                        print("successfully sold " + str(sell) + " stock " + str(ID))
