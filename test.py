@@ -6,10 +6,13 @@ import sys
 money = 0
 owned_stock1 = 0
 owned_stock2 = 0
+owned_stock3 = 0
 stock1price = random.randrange(10, 100, 1)
 stock2price = random.randrange(30, 500, 1)
+stock3price = random.randrange(69, 420, 1)
 osinko1 = stock1price * 0.035 * owned_stock1
 osinko2 = stock2price * 0.05 * owned_stock2
+osinko3 = stock3price * 0.08 * owned_stock3
 round_osinko = round(osinko1) + round(osinko2)
 dont_use_me = 0
 exi = 0
@@ -19,17 +22,21 @@ def background():
     while True:
         global stock1price
         global stock2price
+        global stock3price
         global owned_stock1
         global owned_stock2
+        global owned_stock3
         global osinko1
         global osinko2
+        global osinko3
         global round_osinko
         global money
 
         time.sleep(8)
         osinko1 = stock1price * 0.035 * owned_stock1
         osinko2 = stock2price * 0.05 * owned_stock2
-        round_osinko = round(osinko1) + round(osinko2)
+        osinko3 = stock3price * 0.08 * owned_stock3
+        round_osinko = round(osinko1) + round(osinko2) + round(osinko3)
         money = money + round_osinko
 
         a1 = random.randrange(0, 1000000, 1)
@@ -57,6 +64,17 @@ def background():
 
         if stock2price < 30:
             stock2price = 30
+
+        a3 = random.randrange(0, 100, 1)
+
+        if a3 > 50:
+            stock3price = stock3price + random.randrange(1, 140, 1)
+
+        elif a3 < 50:
+            stock3price = stock3price - random.randrange(1, 140, 1)
+
+        if stock3price < 69:
+            stock3price = 69
 
 
 b = threading.Thread(name='background', target=background)
@@ -92,6 +110,7 @@ while True:
         print("you have " + str(money) + " money")
         print("you have " + str(owned_stock1) + " stocks of Orb Industries")
         print("you have " + str(owned_stock2) + " stocks of Chair")
+        print("you have " + str(owned_stock3) + " stock of The Pile")
         print("your interest is " + str(round_osinko))
 
     elif cmd == "work":
@@ -139,6 +158,7 @@ while True:
                 print("")
                 print("1       Orb Industries          " + str(stock1price) + "             " + str(owned_stock1))
                 print("2       Chair                   " + str(stock2price) + "             " + str(owned_stock2))
+                print("3       The Pile                " + str(stock3price) + "             " + str(owned_stock3))
 
             elif cmd2 == 'buy':
                 ID, buy = input("first enter ID then amount to buy: ").split()
@@ -162,6 +182,16 @@ while True:
                         money = money - buy_cost2
                     print("successfully bought " + str(buy) + " stocks of Chair for " + str(buy_cost2))
 
+                elif ID == str(3):
+                    buy_cost3 = stock3price * int(buy)
+                    if buy_cost3 > money:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        owned_stock3 = owned_stock3 + int(buy)
+                        money = money - buy_cost3
+                        print("successfully bought " + str(buy) + " stocks of The Pile for " + str(buy_cost3))
+
             elif cmd2 == 'sell':
                 ID, sell = input("first enter ID then amount to sell: ").split()
                 if ID == str(1):
@@ -174,7 +204,7 @@ while True:
                         money = money + sell_cost1
                         print("successfully sold " + str(sell) + " stocks of Orb Industries " + str(sell_cost1))
 
-                if ID == str(2):
+                elif ID == str(2):
                     sell_cost2 = int(stock2price) * int(sell)
                     if str(owned_stock2) < str(sell):
                         print("you dont have enough stocks")
@@ -183,3 +213,13 @@ while True:
                         owned_stock2 = int(owned_stock2) - int(sell)
                         money = money + sell_cost2
                         print("successfully sold " + str(sell) + " stocks of Chair for " + str(sell_cost2))
+
+                elif ID == str(3):
+                    sell_cost3 = int(stock3price) * int(sell)
+                    if str(owned_stock3) < str(sell):
+                        print("you dont have enough stocks")
+                        break
+                    else:
+                        owned_stock3 = int(owned_stock3) - int(sell)
+                        money = money + sell_cost3
+                        print("successfully sold " + str(sell) + " stocks of The Pile for " + str(sell_cost3))
