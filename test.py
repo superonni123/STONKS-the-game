@@ -105,12 +105,13 @@ while True:
         print("help         show this page")
         print("work         you gain money from working")
         print("check        shows how many money, stocks and how big interest you got")
+        print("shop         you can purchase upgrades")
         print("stonks       enters STONKS mode")
         print("sleep        you gain energy")
         print("shutdown     shuts the game down")
 
     elif cmd == "check":
-        if energy == 100:
+        if energy == 100:  # TODO figure out how to show more than 100 energy in 10 spaces
             print("   ENERGY")
             print("[==========]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
@@ -296,3 +297,17 @@ while True:
                         owned_stock3 = int(owned_stock3) - int(sell)
                         money = money + sell_cost3
                         print("successfully sold " + str(sell) + " stocks of The Pile for " + str(sell_cost3))
+
+    elif cmd == "shop":  # TODO add shop functionality
+        print("Welcome to M karket")
+
+        while True:
+            cmd3 = input("what do tou want to buy: ")
+
+            if cmd3 == "exit":
+                print("you have exited M karket")
+                break
+
+            elif cmd3 == "help":
+                print("exit     you should know by now")
+                print("help     you know")
