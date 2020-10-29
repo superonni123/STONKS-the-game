@@ -16,6 +16,8 @@ osinko3 = stock3price * 0.08 * owned_stock3
 round_osinko = round(osinko1) + round(osinko2)
 dont_use_me = 0
 exi = 0
+energy = 100
+energy_max = 100
 
 
 def background():
@@ -107,6 +109,61 @@ while True:
         print("shutdown     shuts the game down")
 
     elif cmd == "check":
+        if energy == 100:
+            print("   ENERGY")
+            print("[==========]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 90 <= int(energy) < 100:
+            print("   ENERGY")
+            print("[========= ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 80 <= int(energy) < 90:
+            print("   ENERGY")
+            print("[========  ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 70 <= int(energy) < 80:
+            print("   ENERGY")
+            print("[=======   ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 60 <= int(energy) < 70:
+            print("   ENERGY")
+            print("[======    ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 50 <= int(energy) < 60:
+            print("   ENERGY")
+            print("[=====     ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 40 <= int(energy) < 50:
+            print("   ENERGY")
+            print("[====      ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 30 <= int(energy) < 40:
+            print("   ENERGY")
+            print("[===       ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 20 <= int(energy) < 30:
+            print("   ENERGY")
+            print("[==        ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 10 <= int(energy) < 20:
+            print("   ENERGY")
+            print("[=         ]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
+        elif 0 <= int(energy) < 10:
+            print("   ENERGY")
+            print("[OUT OF ENERGY]")
+            print("Energy: " + str(energy) + "/" + str(energy_max))
+            print("")
         print("you have " + str(money) + " money")
         print("you have " + str(owned_stock1) + " stocks of Orb Industries")
         print("you have " + str(owned_stock2) + " stocks of Chair")
@@ -115,8 +172,15 @@ while True:
 
     elif cmd == "work":
         money_add = random.randrange(5, 20, 1)
-        print("you gained " + str(money_add) + " money from work")
-        money = money + money_add
+        energy_loss = random.randrange(1, 10, 1)
+        if energy < energy_loss:
+            print("you dont have enough energy")
+            print("")
+        else:
+            energy = energy - int(energy_loss)
+            print("you gained " + str(money_add) + " money from work and used " + str(energy_loss) + " energy")
+            print("")
+            money = money + money_add
 
     elif cmd == 'OwO':
         dont_use_me = dont_use_me + 1
@@ -126,6 +190,14 @@ while True:
         if dont_use_me == 2:
             print("HEY don't use this easter egg twice!!")
             sys.exit(0)
+
+    elif cmd == "sleep":
+        energy_add = random.randrange(5, 20, 1)
+        print("you slept and regained " + str(energy_add) + " of energy")
+        energy = energy + energy_add
+        print("")
+        if energy >= 100:
+            energy = 100
 
     elif cmd == "shutdown":
         print("are you sure type 'shutdown again'")
