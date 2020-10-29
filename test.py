@@ -106,6 +106,7 @@ while True:
         print("work         you gain money from working")
         print("check        shows how many money, stocks and how big interest you got")
         print("stonks       enters STONKS mode")
+        print("sleep        you gain energy")
         print("shutdown     shuts the game down")
 
     elif cmd == "check":
@@ -196,8 +197,8 @@ while True:
         print("you slept and regained " + str(energy_add) + " of energy")
         energy = energy + energy_add
         print("")
-        if energy >= 100:
-            energy = 100
+        if energy >= energy_max:
+            energy = energy_max
 
     elif cmd == "shutdown":
         print("are you sure type 'shutdown again'")
