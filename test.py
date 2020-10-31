@@ -111,59 +111,60 @@ while True:
         print("shutdown     shuts the game down")
 
     elif cmd == "check":
-        if energy == 100:  # TODO figure out how to show more than 100 energy in 10 spaces
+        bar_energy = energy / energy_max
+        if bar_energy == 1:
             print("   ENERGY")
             print("[==========]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 90 <= int(energy) < 100:
+        elif 0.9 <= float(bar_energy) < 1:
             print("   ENERGY")
             print("[========= ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 80 <= int(energy) < 90:
+        elif 0.8 <= float(bar_energy) < 0.9:
             print("   ENERGY")
             print("[========  ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 70 <= int(energy) < 80:
+        elif 0.7 <= float(bar_energy) < 0.8:
             print("   ENERGY")
             print("[=======   ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 60 <= int(energy) < 70:
+        elif 0.6 <= float(bar_energy) < 0.7:
             print("   ENERGY")
             print("[======    ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 50 <= int(energy) < 60:
+        elif 0.5 <= float(bar_energy) < 0.6:
             print("   ENERGY")
             print("[=====     ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 40 <= int(energy) < 50:
+        elif 0.4 <= float(bar_energy) < 0.5:
             print("   ENERGY")
             print("[====      ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 30 <= int(energy) < 40:
+        elif 0.3 <= float(bar_energy) < 0.4:
             print("   ENERGY")
             print("[===       ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 20 <= int(energy) < 30:
+        elif 0.2 <= float(bar_energy) < 0.3:
             print("   ENERGY")
             print("[==        ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 10 <= int(energy) < 20:
+        elif 0.1 <= float(bar_energy) < 0.2:
             print("   ENERGY")
             print("[=         ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
-        elif 0 <= int(energy) < 10:
+        elif 0 <= float(bar_energy) < 0.1:
             print("   ENERGY")
-            print("[OUT OF ENERGY]")
+            print("[          ]")
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
         print("you have " + str(money) + " money")
