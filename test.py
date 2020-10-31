@@ -7,13 +7,19 @@ money = 0
 owned_stock1 = 0
 owned_stock2 = 0
 owned_stock3 = 0
+owned_stock4 = 0
+owned_stock5 = 0
 stock1price = random.randrange(10, 100, 1)
 stock2price = random.randrange(30, 500, 1)
 stock3price = random.randrange(69, 420, 1)
+stock4price = random.randrange(123, 666, 1)
+stock5price = random.randrange(88, 176, 1)
 osinko1 = stock1price * 0.035 * owned_stock1
 osinko2 = stock2price * 0.05 * owned_stock2
 osinko3 = stock3price * 0.08 * owned_stock3
-round_osinko = round(osinko1) + round(osinko2)
+osinko4 = stock4price * 0.04 * owned_stock4
+osinko5 = owned_stock5 * 0.69 * owned_stock5
+round_osinko = round(osinko1) + round(osinko2) + round(osinko3) + round(osinko4) + round(osinko5)
 dont_use_me = 0
 exi = 0
 energy = 100
@@ -25,12 +31,18 @@ def background():
         global stock1price
         global stock2price
         global stock3price
+        global stock4price
+        global stock5price
         global owned_stock1
         global owned_stock2
         global owned_stock3
+        global owned_stock4
+        global owned_stock5
         global osinko1
         global osinko2
         global osinko3
+        global osinko4
+        global osinko5
         global round_osinko
         global money
 
@@ -38,7 +50,9 @@ def background():
         osinko1 = stock1price * 0.035 * owned_stock1
         osinko2 = stock2price * 0.05 * owned_stock2
         osinko3 = stock3price * 0.08 * owned_stock3
-        round_osinko = round(osinko1) + round(osinko2) + round(osinko3)
+        osinko4 = stock4price * 0.04 * owned_stock4
+        osinko5 = owned_stock5 * 0.069 * owned_stock5
+        round_osinko = round(osinko1) + round(osinko2) + round(osinko3) + round(osinko4) + round(osinko5)
         money = money + round_osinko
 
         a1 = random.randrange(0, 1000000, 1)
@@ -77,6 +91,28 @@ def background():
 
         if stock3price < 69:
             stock3price = 69
+
+        a4 = random.randrange(0, 68)
+
+        if a4 > 34:
+            stock4price = stock4price + random.randrange(1, 435, 1)
+
+        elif a4 < 34:
+            stock4price = stock4price - random.randrange(1, 435, 1)
+
+        if stock4price < 123:
+            stock4price = 123
+
+        a5 = random.randrange(1, 10, 1)
+
+        if a5 > 5:
+            stock5price = stock5price + random.randrange(1, 180, 1)
+
+        elif a5 < 5:
+            stock5price = stock5price - random.randrange(1, 180, 1)
+
+        if stock5price < 88:
+            stock5price = 88
 
 
 b = threading.Thread(name='background', target=background)
@@ -170,7 +206,9 @@ while True:
         print("you have " + str(money) + " money")
         print("you have " + str(owned_stock1) + " stocks of Orb Industries")
         print("you have " + str(owned_stock2) + " stocks of Chair")
-        print("you have " + str(owned_stock3) + " stock of The Pile")
+        print("you have " + str(owned_stock3) + " stocks of The Pile")
+        print("you have " + str(owned_stock4) + " stocks of Chromble's Pool Service")
+        print("you have " + str(owned_stock5) + " stocks of Onion Bot")
         print("your interest is " + str(round_osinko))
 
     elif cmd == "work":
@@ -234,6 +272,8 @@ while True:
                 print("1       Orb Industries          " + str(stock1price) + "             " + str(owned_stock1))
                 print("2       Chair                   " + str(stock2price) + "             " + str(owned_stock2))
                 print("3       The Pile                " + str(stock3price) + "             " + str(owned_stock3))
+                print("4       Chromble's Pool Service " + str(stock4price) + "             " + str(owned_stock4))
+                print("4       Onion Bot               " + str(stock5price) + "             " + str(owned_stock5))
 
             elif cmd2 == 'buy':
                 ID, buy = input("first enter ID then amount to buy: ").split()
@@ -267,6 +307,26 @@ while True:
                         money = money - buy_cost3
                         print("successfully bought " + str(buy) + " stocks of The Pile for " + str(buy_cost3))
 
+                elif ID == str(4):
+                    buy_cost4 = stock4price * int(buy)
+                    if buy_cost4 > money:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        owned_stock4 = owned_stock4 + int(buy)
+                        money = money - buy_cost4
+                        print("successfully bought " + str(buy) + " stocks of Chromble's Pool Service for " + str(buy_cost4))
+
+                elif ID == str(5):
+                    buy_cost5 = stock5price * int(buy)
+                    if buy_cost5 > money:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        owned_stock5 = owned_stock5 + int(buy)
+                        money = money - buy_cost5
+                        print("successfully bought " + str(buy) + " stocks of Onion Bot for " + str(buy_cost5))
+
             elif cmd2 == 'sell':
                 ID, sell = input("first enter ID then amount to sell: ").split()
                 if ID == str(1):
@@ -298,6 +358,26 @@ while True:
                         owned_stock3 = int(owned_stock3) - int(sell)
                         money = money + sell_cost3
                         print("successfully sold " + str(sell) + " stocks of The Pile for " + str(sell_cost3))
+
+                elif ID == str(4):
+                    sell_cost4 = int(stock4price) * int(sell)
+                    if str(owned_stock4) < str(sell):
+                        print("you dont have enough stocks")
+                        break
+                    else:
+                        owned_stock4 = int(owned_stock4) - int(sell)
+                        money = money + sell_cost4
+                        print("successfully sold " + str(sell) + " stocks of Chromble's Pool Service for " + str(sell_cost4))
+
+                elif ID == str(5):
+                    sell_cost5 = int(stock5price) * int(sell)
+                    if str(owned_stock5) < str(sell):
+                        print("you dont have enough stocks")
+                        break
+                    else:
+                        owned_stock5 = int(owned_stock5) - int(sell)
+                        money = money + sell_cost5
+                        print("successfully sold " + str(sell) + " stocks of Onion Bot for " + str(sell_cost5))
 
     elif cmd == "shop":  # TODO add shop functionality
         print("Welcome to M karket")
