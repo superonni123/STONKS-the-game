@@ -390,5 +390,7 @@ while True:
                 break
 
             elif cmd3 == "help":
-                print("exit     you should know by now")
-                print("help     you know")
+                print("exit     you know")
+                print("help     you should know by now if you don't then this might be very " + '\033[1m' + ' helpful ' + '\033[0m' + "https://www.dictionary.com/browse/help")
+                print("inv      shows you what you can buy")
+                print("buy      buy items")
