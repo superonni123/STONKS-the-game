@@ -24,6 +24,14 @@ dont_use_me = 0
 exi = 0
 energy = 100
 energy_max = 100
+work_min = 5
+work_max = 20
+work_min_up = 0
+work_max_up = 0
+energy_gain_min = 5
+energy_gain_max = 20
+energy_up = 0
+energy_max_up = 0
 
 
 def background():
@@ -46,7 +54,7 @@ def background():
         global round_osinko
         global money
 
-        time.sleep(8)
+        time.sleep(15)
         osinko1 = stock1price * 0.035 * owned_stock1
         osinko2 = stock2price * 0.05 * owned_stock2
         osinko3 = stock3price * 0.08 * owned_stock3
@@ -204,15 +212,16 @@ while True:
             print("Energy: " + str(energy) + "/" + str(energy_max))
             print("")
         print("you have " + str(money) + " money")
+        print("your interest is " + str(round_osinko))
+        print("")
         print("you have " + str(owned_stock1) + " stocks of Orb Industries")
         print("you have " + str(owned_stock2) + " stocks of Chair")
         print("you have " + str(owned_stock3) + " stocks of The Pile")
         print("you have " + str(owned_stock4) + " stocks of Chromble's Pool Service")
         print("you have " + str(owned_stock5) + " stocks of Onion Bot")
-        print("your interest is " + str(round_osinko))
 
     elif cmd == "work":
-        money_add = random.randrange(5, 20, 1)
+        money_add = random.randrange(work_min, work_max, 1)
         energy_loss = random.randrange(1, 10, 1)
         if energy < energy_loss:
             print("you dont have enough energy")
@@ -233,7 +242,7 @@ while True:
             sys.exit(0)
 
     elif cmd == "sleep":
-        energy_add = random.randrange(5, 20, 1)
+        energy_add = random.randrange(energy_gain_min, energy_gain_max, 1) + energy_up
         print("you slept and regained " + str(energy_add) + " of energy")
         energy = energy + energy_add
         print("")
@@ -267,18 +276,20 @@ while True:
                 print("sell     sell stocks")
 
             elif cmd2 == 'check':
-                print("ID     STOCK                    price        owned")
+                print("you have " + str(money) + " money")
                 print("")
+                print("ID     STOCK                    price        owned")
                 print("1       Orb Industries          " + str(stock1price) + "             " + str(owned_stock1))
                 print("2       Chair                   " + str(stock2price) + "             " + str(owned_stock2))
                 print("3       The Pile                " + str(stock3price) + "             " + str(owned_stock3))
                 print("4       Chromble's Pool Service " + str(stock4price) + "             " + str(owned_stock4))
-                print("4       Onion Bot               " + str(stock5price) + "             " + str(owned_stock5))
+                print("5       Onion Bot               " + str(stock5price) + "             " + str(owned_stock5))
+                print("")
 
             elif cmd2 == 'buy':
-                ID, buy = input("first enter ID then amount to buy: ").split()
+                IDb, buy = input("first enter ID then amount to buy: ").split()
 
-                if ID == str(1):
+                if IDb == str(1):
                     buy_cost1 = stock1price * int(buy)
                     if buy_cost1 > money:
                         print("you dont have enough money")
@@ -287,7 +298,7 @@ while True:
                         money = money - buy_cost1
                         owned_stock1 = owned_stock1 + int(buy)
                         print("successfully bought " + str(buy) + " stocks of Orb Industries for " + str(buy_cost1))
-                elif ID == str(2):
+                elif IDb == str(2):
                     buy_cost2 = stock2price * int(buy)
                     if buy_cost2 > money:
                         print("you dont have enough money")
@@ -297,7 +308,7 @@ while True:
                         money = money - buy_cost2
                     print("successfully bought " + str(buy) + " stocks of Chair for " + str(buy_cost2))
 
-                elif ID == str(3):
+                elif IDb == str(3):
                     buy_cost3 = stock3price * int(buy)
                     if buy_cost3 > money:
                         print("you dont have enough money")
@@ -307,7 +318,7 @@ while True:
                         money = money - buy_cost3
                         print("successfully bought " + str(buy) + " stocks of The Pile for " + str(buy_cost3))
 
-                elif ID == str(4):
+                elif IDb == str(4):
                     buy_cost4 = stock4price * int(buy)
                     if buy_cost4 > money:
                         print("you dont have enough money")
@@ -317,7 +328,7 @@ while True:
                         money = money - buy_cost4
                         print("successfully bought " + str(buy) + " stocks of Chromble's Pool Service for " + str(buy_cost4))
 
-                elif ID == str(5):
+                elif IDb == str(5):
                     buy_cost5 = stock5price * int(buy)
                     if buy_cost5 > money:
                         print("you dont have enough money")
@@ -328,8 +339,8 @@ while True:
                         print("successfully bought " + str(buy) + " stocks of Onion Bot for " + str(buy_cost5))
 
             elif cmd2 == 'sell':
-                ID, sell = input("first enter ID then amount to sell: ").split()
-                if ID == str(1):
+                IDs, sell = input("first enter ID then amount to sell: ").split()
+                if IDs == str(1):
                     sell_cost1 = int(stock1price) * int(sell)
                     if str(owned_stock1) < str(sell):
                         print("you dont have enough stocks")
@@ -339,7 +350,7 @@ while True:
                         money = money + sell_cost1
                         print("successfully sold " + str(sell) + " stocks of Orb Industries " + str(sell_cost1))
 
-                elif ID == str(2):
+                elif IDs == str(2):
                     sell_cost2 = int(stock2price) * int(sell)
                     if str(owned_stock2) < str(sell):
                         print("you dont have enough stocks")
@@ -349,7 +360,7 @@ while True:
                         money = money + sell_cost2
                         print("successfully sold " + str(sell) + " stocks of Chair for " + str(sell_cost2))
 
-                elif ID == str(3):
+                elif IDs == str(3):
                     sell_cost3 = int(stock3price) * int(sell)
                     if str(owned_stock3) < str(sell):
                         print("you dont have enough stocks")
@@ -359,7 +370,7 @@ while True:
                         money = money + sell_cost3
                         print("successfully sold " + str(sell) + " stocks of The Pile for " + str(sell_cost3))
 
-                elif ID == str(4):
+                elif IDs == str(4):
                     sell_cost4 = int(stock4price) * int(sell)
                     if str(owned_stock4) < str(sell):
                         print("you dont have enough stocks")
@@ -369,7 +380,7 @@ while True:
                         money = money + sell_cost4
                         print("successfully sold " + str(sell) + " stocks of Chromble's Pool Service for " + str(sell_cost4))
 
-                elif ID == str(5):
+                elif IDs == str(5):
                     sell_cost5 = int(stock5price) * int(sell)
                     if str(owned_stock5) < str(sell):
                         print("you dont have enough stocks")
@@ -383,7 +394,7 @@ while True:
         print("Welcome to M karket")
 
         while True:
-            cmd3 = input("what do tou want to buy: ")
+            cmd3 = input("what do you want to buy: ")
 
             if cmd3 == "exit":
                 print("you have exited M karket")
@@ -394,3 +405,54 @@ while True:
                 print("help     you should know by now if you don't then this might be very " + '\033[1m' + ' helpful ' + '\033[0m' + "https://www.dictionary.com/browse/help")
                 print("inv      shows you what you can buy")
                 print("buy      buy items")
+
+            elif cmd3 == "inv":
+                print("you have " + str(money) + " money")
+                print("")
+                print("ID           NAME            COST        OWNED")
+                print("1            work min up     10          " + str(work_min_up))
+                print("2            work max up     10          " + str(work_max_up))
+                print("3            sleep up        15          " + str(energy_up))
+                print("4            max energy up   30          " + str(energy_max_up))
+                print("")
+
+            elif cmd3 == "buy":
+                IDi = input("enter the ID of the item you want to purchase: ")
+
+                if IDi == str(1):
+                    if work_min == work_max:
+                        print("you cant upgrade this more")
+                        break
+                    elif money < 10:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        work_min_up = work_min_up + 1
+                        money = money - 10
+                        work_min = work_min + work_min_up
+
+                elif IDi == str(2):
+                    if money < 10:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        work_max_up = work_max_up + 1
+                        money = money - 10
+                        work_max = work_max + work_max_up
+
+                elif IDi == str(3):
+                    if money < 10:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        energy_up = energy_up + 1
+                        money = money - 15
+
+                elif IDi == str(4):
+                    if money < 30:
+                        print("you dont have enough money")
+                        break
+                    else:
+                        energy_max_up = energy_max_up + 1
+                        money = money - 30
+                        energy_max = energy_max + 5
