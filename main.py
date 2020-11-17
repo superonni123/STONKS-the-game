@@ -390,7 +390,7 @@ while True:
                         money = money + sell_cost5
                         print("successfully sold " + str(sell) + " stocks of Onion Bot for " + str(sell_cost5))
 
-    elif cmd == "shop":  # TODO add shop functionality
+    elif cmd == "shop":
         print("Welcome to M karket")
 
         while True:
