@@ -4,9 +4,9 @@ A text based game where you make stonks
 * [Info](#Info)
 * [Setup](#Setup)
 
-##Info
+## Info
 Made with Python 3.8.5 
-##Setup
+## Setup
 Clone or download this repo to desktop for example
 ```
 $ cd ../STONKS-the-game
