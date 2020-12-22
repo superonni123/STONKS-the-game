@@ -13,7 +13,7 @@ $ cd ../STONKS-the-game
 ```
 if you have python installed
 ```
-$ python main.py
+$ python3 main.py
 ```
 else to launch the .exe file
 ```
