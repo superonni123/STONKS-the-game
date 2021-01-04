@@ -123,6 +123,10 @@ def background():
             stock5price = 88
 
 
+def clear():
+    print("")
+
+
 b = threading.Thread(name='background', target=background)
 
 b.start()
@@ -148,13 +152,14 @@ while True:
         print("")
         print("help         show this page")
         print("work         you gain money from working")
-        print("check        shows how many money, stocks and how big interest you got")
+        print("stat        shows how many money, stocks and how big interest you got")
         print("shop         you can purchase upgrades")
         print("stonks       enters STONKS mode")
         print("sleep        you gain energy")
+        print("credits      you can watch the credits :D")
         print("shutdown     shuts the game down")
 
-    elif cmd == "check":
+    elif cmd == "stat":
         bar_energy = energy / energy_max
         if bar_energy == 1:
             print("   ENERGY")
@@ -248,6 +253,15 @@ while True:
         print("")
         if energy >= energy_max:
             energy = energy_max
+
+    elif cmd == "credits":
+        for _ in range(100):
+            clear()
+            print("thank you for looking here :D")
+            time.sleep(2)
+            print("you know what i give you a bonus from this")
+            print("")
+            break
 
     elif cmd == "shutdown":
         print("are you sure type 'shutdown again'")
