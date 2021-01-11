@@ -5,7 +5,7 @@ A text based game where you make stonks
 * [Setup](#Setup)
 
 ## Info
-Made with Python 3.8.5 
+Made with Python 3.9 
 ## Setup
 Clone or download this repo to desktop for example
 ```

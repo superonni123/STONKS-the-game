@@ -1,7 +1,6 @@
 import random
 import time
 import threading
-import sys
 
 money = 0
 owned_stock1 = 0
@@ -9,11 +8,11 @@ owned_stock2 = 0
 owned_stock3 = 0
 owned_stock4 = 0
 owned_stock5 = 0
-stock1price = random.randrange(10, 100, 1)
-stock2price = random.randrange(30, 500, 1)
-stock3price = random.randrange(69, 420, 1)
-stock4price = random.randrange(123, 666, 1)
-stock5price = random.randrange(88, 176, 1)
+stock1price = random.randrange(10, 100)
+stock2price = random.randrange(30, 500)
+stock3price = random.randrange(69, 420)
+stock4price = random.randrange(123, 666)
+stock5price = random.randrange(88, 176)
 osinko1 = stock1price * 0.035 * owned_stock1
 osinko2 = stock2price * 0.05 * owned_stock2
 osinko3 = stock3price * 0.08 * owned_stock3
@@ -133,6 +132,8 @@ b.start()
 
 print("initiating loading")
 time.sleep(1)
+f = open("save_data.txt", "a")
+f.close()
 print("loading .")
 time.sleep(1)
 print("loading ..")
@@ -152,12 +153,13 @@ while True:
         print("")
         print("help         show this page")
         print("work         you gain money from working")
-        print("stat        shows how many money, stocks and how big interest you got")
+        print("stat         shows how many money, stocks and how big interest you got")
         print("shop         you can purchase upgrades")
         print("stonks       enters STONKS mode")
         print("sleep        you gain energy")
         print("credits      you can watch the credits :D")
-        print("shutdown     shuts the game down")
+        print("save         saves the game")
+        print("load         loads your game")
 
     elif cmd == "stat":
         bar_energy = energy / energy_max
@@ -237,14 +239,6 @@ while True:
             print("")
             money = money + money_add
 
-    elif cmd == 'OwO':
-        dont_use_me = dont_use_me + 1
-        print("OwO you found a easter egg good for you")
-        print("unless you looked at the source code D:<")
-        money = money + 1000000000
-        if dont_use_me == 2:
-            print("HEY don't use this easter egg twice!!")
-            sys.exit(0)
 
     elif cmd == "sleep":
         energy_add = random.randrange(energy_gain_min, energy_gain_max, 1) + energy_up
@@ -259,16 +253,61 @@ while True:
             clear()
             print("thank you for looking here :D")
             time.sleep(2)
-            print("you know what i give you a bonus from this")
+            dont_use_me = dont_use_me + 1
+            if dont_use_me == 1:
+                print("you know what i give you a bonus from this")
+                money = money + 1000000000
+            if dont_use_me == 2:
+                print("did you think you get more")
+
             print("")
             break
 
-    elif cmd == "shutdown":
-        print("are you sure type 'shutdown again'")
-        exi = exi + 1
-        if exi == 2:
-            print("game closed now you can close this window")
-            sys.exit()
+    elif cmd == "load":
+        f = open("save_data.txt", "r")
+        money = f.readline()
+        owned_stock1 = f.readline()
+        owned_stock2 = f.readline()
+        owned_stock3 = f.readline()
+        owned_stock4 = f.readline()
+        owned_stock5 = f.readline()
+        energy_max_up = f.readline()
+        work_min_up = f.readline()
+        work_max_up = f.readline()
+        energy_up = f.readline()
+        f.close()
+        money = int(money)
+        owned_stock1 = int(owned_stock1)
+        owned_stock2 = int(owned_stock2)
+        owned_stock3 = int(owned_stock3)
+        owned_stock4 = int(owned_stock4)
+        owned_stock5 = int(owned_stock5)
+        energy_max_up = int(energy_max_up)
+        work_min_up = int(work_min_up)
+        work_max_up = int(work_max_up)
+        energy_up = int(energy_up)
+
+        energy_max = energy_max + (energy_max_up * 5)
+        work_min = work_min + (work_min_up * 1)
+        work_max = work_max + (work_max_up * 1)
+        energy_up = energy_up + (energy_up *1)
+
+        print("loading complete")
+
+    elif cmd == "save":
+        f = open("save_data.txt", "w")
+        f.write(str(money) + "\n")
+        f.write(str(owned_stock1) + "\n")
+        f.write(str(owned_stock2) + "\n")
+        f.write(str(owned_stock3) + "\n")
+        f.write(str(owned_stock4) + "\n")
+        f.write(str(owned_stock5) + "\n")
+        f.write(str(energy_max_up) + "\n")
+        f.write(str(work_min_up) + "\n")
+        f.write(str(work_max_up) + "\n")
+        f.write(str(energy_up) + "\n")
+        f.close()
+        print("saving complete")
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
@@ -455,7 +494,7 @@ while True:
                         work_max = work_max + work_max_up
 
                 elif IDi == str(3):
-                    if money < 10:
+                    if money < 15:
                         print("you dont have enough money")
                         break
                     else:
