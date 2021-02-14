@@ -152,14 +152,15 @@ while True:
     if cmd == "help":
         print("")
         print("help         show this page")
+        print("save         saves the game")
+        print("load         loads your game")
+        print("credits      nice people go here :D")
         print("work         you gain money from working")
         print("stat         shows how many money, stocks and how big interest you got")
         print("shop         you can purchase upgrades")
         print("stonks       enters STONKS mode")
         print("sleep        you gain energy")
-        print("credits      you can watch the credits :D")
-        print("save         saves the game")
-        print("load         loads your game")
+        print("roll         remember the house always wins")
 
     elif cmd == "stat":
         bar_energy = energy / energy_max
@@ -239,6 +240,22 @@ while True:
             print("")
             money = money + money_add
 
+    elif cmd == "roll":
+        money = money - 20
+        n1 = random.randrange(0, 6, 1)
+        n2 = random.randrange(0, 6, 1)
+        n3 = random.randrange(0, 6, 1)
+        print("=====  =====  =====")
+        print("| " + str(n1) + " | " " | " + str(n2) + " | "  " | " + str(n3) + " | ")
+        print("=====  =====  =====")
+        if n1 == n2 and n1 == n3:
+            print("three same you have won 90 money")
+            money = money + 90
+        elif n1 == n2 or n1 == n3 or n2 == n3:
+            print("two same you have won 35")
+            money = money + 35
+        else:
+            print("better luck next time")
 
     elif cmd == "sleep":
         energy_add = random.randrange(energy_gain_min, energy_gain_max, 1) + energy_up
@@ -276,6 +293,7 @@ while True:
         work_max_up = f.readline()
         energy_up = f.readline()
         f.close()
+
         money = int(money)
         owned_stock1 = int(owned_stock1)
         owned_stock2 = int(owned_stock2)
