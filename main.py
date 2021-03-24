@@ -1,6 +1,8 @@
 import random
 import time
 import threading
+import socket
+import os
 
 money = 0
 owned_stock1 = 0
@@ -132,8 +134,6 @@ b.start()
 
 print("initiating loading")
 time.sleep(1)
-f = open("save_data.txt", "a")
-f.close()
 print("loading .")
 time.sleep(1)
 print("loading ..")
@@ -145,6 +145,7 @@ time.sleep(1)
 print("")
 
 print('welcome to STONKS the game')
+name = input("what is your name (for online leaderboard): ")
 while True:
     print("")
     cmd = input("what do you want to do: ")
@@ -161,8 +162,12 @@ while True:
         print("stonks       enters STONKS mode")
         print("sleep        you gain energy")
         print("roll         remember the house always wins")
+        print("upload       uploads your save to online leaderboard")
 
     elif cmd == "stat":
+        print("")
+        print("     " + name)
+        print("")
         bar_energy = energy / energy_max
         if bar_energy == 1:
             print("   ENERGY")
@@ -281,7 +286,9 @@ while True:
             break
 
     elif cmd == "load":
-        f = open("save_data.txt", "r")
+        f = open("save_data.txt", "rt")
+        ID = f.readline()
+        name = f.readline()
         money = f.readline()
         owned_stock1 = f.readline()
         owned_stock2 = f.readline()
@@ -294,6 +301,8 @@ while True:
         energy_up = f.readline()
         f.close()
 
+        ID = str(ID)
+        name = str(name)
         money = int(money)
         owned_stock1 = int(owned_stock1)
         owned_stock2 = int(owned_stock2)
@@ -308,12 +317,18 @@ while True:
         energy_max = energy_max + (energy_max_up * 5)
         work_min = work_min + (work_min_up * 1)
         work_max = work_max + (work_max_up * 1)
-        energy_up = energy_up + (energy_up *1)
+        energy_up = energy_up + (energy_up * 1)
 
         print("loading complete")
 
     elif cmd == "save":
+        if not os.path.exists("save_data.txt"):
+            ID = random.randrange(1000000000, 9999999999)
+        if os.path.exists("save_data.txt"):
+            os.remove("save_data.txt")
         f = open("save_data.txt", "w")
+        f.write(str(ID) + "\n")
+        f.write(str(name) + "\n")
         f.write(str(money) + "\n")
         f.write(str(owned_stock1) + "\n")
         f.write(str(owned_stock2) + "\n")
@@ -326,6 +341,13 @@ while True:
         f.write(str(energy_up) + "\n")
         f.close()
         print("saving complete")
+
+    elif cmd == "upload":
+        with socket.socket() as s:
+            s.connect(('pphole.ddns.net', 9000))
+            with open('save_data.txt', 'rb') as f:
+                s.sendall(f.read())
+        print("uploading completed")
 
     elif cmd == "stonks":
         print("you have entered STONKS mode")
