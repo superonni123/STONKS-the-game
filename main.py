@@ -1,8 +1,15 @@
-import random
-import time
-import threading
-import socket
 import os
+import random
+import socket
+import sys
+import threading
+import time
+
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QWidget
+
+app = QApplication(sys.argv)
 
 money = 0
 owned_stock1 = 0
@@ -149,6 +156,17 @@ name = input("what is your name (for online leaderboard): ")
 while True:
     print("")
     cmd = input("what do you want to do: ")
+
+    if cmd == "gui":
+        window = QWidget()
+        window.setWindowTitle('STONKS-GUI')
+        window.setGeometry(150, 125, 2500, 500)
+        window.move(60, 15)
+        helloMsg = QLabel('<h1>STONKS</h1>', parent=window)
+        helloMsg.move(60, 15)
+
+        window.show()
+        sys.exit(app.exec_())
 
     if cmd == "help":
         print("")
@@ -419,7 +437,8 @@ while True:
                     else:
                         owned_stock4 = owned_stock4 + int(buy)
                         money = money - buy_cost4
-                        print("successfully bought " + str(buy) + " stocks of Chromble's Pool Service for " + str(buy_cost4))
+                        print("successfully bought " + str(buy) + " stocks of Chromble's Pool Service for " + str(
+                            buy_cost4))
 
                 elif IDb == str(5):
                     buy_cost5 = stock5price * int(buy)
@@ -471,7 +490,8 @@ while True:
                     else:
                         owned_stock4 = int(owned_stock4) - int(sell)
                         money = money + sell_cost4
-                        print("successfully sold " + str(sell) + " stocks of Chromble's Pool Service for " + str(sell_cost4))
+                        print("successfully sold " + str(sell) + " stocks of Chromble's Pool Service for " + str(
+                            sell_cost4))
 
                 elif IDs == str(5):
                     sell_cost5 = int(stock5price) * int(sell)
@@ -495,7 +515,9 @@ while True:
 
             elif cmd3 == "help":
                 print("exit     you know")
-                print("help     you should know by now if you don't then this might be very " + '\033[1m' + ' helpful ' + '\033[0m' + "https://www.dictionary.com/browse/help")
+                print(
+                    "help     you should know by now if you don't then this might be very " + '\033[1m' + ' helpful '
+                    + '\033[0m' + "https://www.dictionary.com/browse/help")
                 print("inv      shows you what you can buy")
                 print("buy      buy items")
 
