@@ -135,20 +135,21 @@ def clear():
     print("")
 
 
+
 b = threading.Thread(name='background', target=background)
 
 b.start()
 
 print("initiating loading")
-time.sleep(1)
+time.sleep(0.5)
 print("loading .")
-time.sleep(1)
+time.sleep(0.5)
 print("loading ..")
-time.sleep(1)
+time.sleep(0.5)
 print("loading ...")
-time.sleep(1)
+time.sleep(0.5)
 print("loading complete")
-time.sleep(1)
+time.sleep(0.5)
 print("")
 
 print('welcome to STONKS the game')
